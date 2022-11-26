@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Heroes } from 'src/app/model/heroes';
+import { HeroesService } from 'src/app/service/heroes.service';
 
 @Component({
   selector: 'app-herocard',
@@ -9,7 +10,17 @@ import { Heroes } from 'src/app/model/heroes';
 export class HerocardComponent implements OnInit {
   @Input() hero: Heroes = new Heroes();
 
-  constructor() {}
+  constructor(private heroService: HeroesService) {}
 
   ngOnInit(): void {}
+
+  removeHero(hero: Heroes): void {
+    if (confirm('Are you sure?')) {
+      this.heroService
+        .remove(hero)
+        .subscribe(() =>
+          this.heroService.getAll().subscribe(() => location.reload())
+        );
+    }
+  }
 }

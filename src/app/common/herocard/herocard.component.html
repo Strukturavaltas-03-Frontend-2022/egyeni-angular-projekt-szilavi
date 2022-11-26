@@ -30,12 +30,17 @@
     </p>
     <div class="btn-group" role="group">
       <button
-        routerLink="/edithero"
+        [routerLink]="['/heroeditor/', hero.id]"
         class="btn btn-primary btn-sm hotstext editbtn"
       >
         Edit
       </button>
-      <button class="btn btn-danger btn-sm hotstext deletebtn">Delete</button>
+      <button
+        (click)="removeHero(hero)"
+        class="btn btn-danger btn-sm hotstext deletebtn"
+      >
+        Delete
+      </button>
     </div>
   </div>
 </div>

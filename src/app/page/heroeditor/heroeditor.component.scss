@@ -3,22 +3,24 @@
   src: url("../../../assets/fonts/bignoodletitlingoblique.ttf");
 }
 
+.jumbotron {
+  background: linear-gradient(#19193f, #0f325b);
+}
+
+.hotstext {
+  font-family: "bignoodle";
+  font-size: 2rem;
+}
+
 .formtext {
   font-family: "bignoodle";
   font-size: 1.5rem;
 }
 
-.labeltext {
+.hotstitle {
   font-family: "bignoodle";
-}
-
-li {
-  cursor: pointer;
-  user-select: none;
-}
-
-.jumbotron {
-  background: linear-gradient(#19193f, #0f325b);
+  font-size: 4rem;
+  display: inline-block;
 }
 
 button {

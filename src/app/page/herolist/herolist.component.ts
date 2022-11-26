@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Heroes } from 'src/app/model/heroes';
 import { HeroesService } from 'src/app/service/heroes.service';
 
@@ -9,9 +9,63 @@ import { HeroesService } from 'src/app/service/heroes.service';
   styleUrls: ['./herolist.component.scss'],
 })
 export class HerolistComponent implements OnInit {
-  heroList$: BehaviorSubject<Heroes[]> = this.heroesService.heroes$;
+  //heroList$: BehaviorSubject<Heroes[]> = this.heroesService.heroes$; a lapozó elkészültéig behaviorsubject volt, utána váltottam
+
+  hello: string = 'hello';
+
+  //paginator
+
+  allHero$: Observable<Heroes[]> = this.heroesService.getAll();
+
+  allPage: number[] = [];
+
+  page: number = 1;
+
+  heroList: Heroes[] = [];
+
+  //searcher
+
+  phrase: string = '';
+  filterKey: string = '';
+  heroFilterKeys: any[] = [
+    { key: 'name', title: 'Hero name' },
+    { key: 'owned', title: 'Owned' },
+  ];
 
   constructor(private heroesService: HeroesService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.refreshPage();
+
+    this.heroesService.getAll().subscribe((datalist) => {
+      for (let i = 0; i < Math.ceil(datalist.length / 20); i++) {
+        this.allPage.push(i + 1);
+      }
+    });
+  }
+
+  onPage(page: number): void {
+    this.page = page;
+    this.refreshPage();
+  }
+
+  prevPage(): void {
+    if (this.page > 1) {
+      this.page = this.page - 1;
+    }
+    this.refreshPage();
+  }
+
+  nextPage(): void {
+    if (this.page !== this.allPage.length) {
+      this.page = this.page + 1;
+    }
+    this.refreshPage();
+  }
+
+  refreshPage(): void {
+    this.heroesService
+      .getAll(`?_page=${this.page}&_limit=20`)
+      .subscribe((dataList) => (this.heroList = dataList));
+  }
 }
