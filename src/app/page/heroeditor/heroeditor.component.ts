@@ -21,13 +21,13 @@ export class HeroeditorComponent implements OnInit {
   );
 
   statusList: any[] = [
-    { key: true, title: 'YES, the hero is in my library' },
-    { key: false, title: 'NO, the hero is not in my library' },
+    { key: 'true', title: 'YES, the hero is in my library' },
+    { key: '', title: 'NO, the hero is not in my library' },
   ];
 
   hero: Hero = new Hero();
 
-  checked: boolean = true;
+  checked: boolean = false;
 
   constructor() {}
 
@@ -38,19 +38,13 @@ export class HeroeditorComponent implements OnInit {
   }
 
   onChecked(): void {
-    if (this.checked === true) {
-      this.checked = false;
-    } else if (this.checked === false) {
-      this.checked = true;
-    }
+    this.checked = !this.checked;
   }
 
   onSubmit(hero: Hero): void {
     hero.id = Number(hero.id);
     hero.level = Number(hero.level);
     hero.owned = Boolean(hero.owned);
-
-    console.log(hero);
 
     if (this.hero.id) {
       this.heroService

@@ -11,11 +11,9 @@ import { HeroesService } from 'src/app/service/heroes.service';
 export class HerolistComponent implements OnInit {
   //heroList$: BehaviorSubject<Heroes[]> = this.heroesService.heroes$; a lapozó elkészültéig behaviorsubject volt, utána váltottam
 
-  hello: string = 'hello';
+  allHero$: Observable<Hero[]> = this.heroesService.getAll();
 
   //paginator
-
-  allHero$: Observable<Hero[]> = this.heroesService.getAll();
 
   allPage: number[] = [];
 

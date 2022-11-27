@@ -1,6 +1,7 @@
+<!-- Searcher -->
 <div class="mt-4 p-5 text-white rounded my-3 jumbotron">
   <form class="row g-3">
-    <div class="col-2 d-flex justify-content-center align-items-center my-5">
+    <div class="col-md-2 d-flex justify-content-center align-items-center my-5">
       <select
         id="select"
         name="filter"
@@ -35,12 +36,15 @@
     </div>
   </form>
 </div>
+
+<!-- New Hero Button -->
 <div>
   <button [routerLink]="['/heroeditor/']" class="btn btn-primary btn-lg">
     Add new hero
   </button>
 </div>
 
+<!-- Paginator -->
 <div class="col-12">
   <div *ngIf="!filterKey" class="row">
     <nav aria-label="Page navigation example">
@@ -62,6 +66,7 @@
     </nav>
   </div>
 
+  <!-- Hero List -->
   <div *ngIf="!filterKey">
     <app-herocard *ngFor="let hero of heroList" [hero]="hero"></app-herocard>
   </div>
