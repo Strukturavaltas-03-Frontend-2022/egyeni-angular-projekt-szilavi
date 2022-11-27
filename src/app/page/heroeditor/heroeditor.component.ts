@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
-import { Heroes } from 'src/app/model/heroes';
+import { Hero } from 'src/app/model/hero';
 import { HeroesService } from 'src/app/service/heroes.service';
 
 @Component({
@@ -16,7 +16,7 @@ export class HeroeditorComponent implements OnInit {
 
   //itt csak azért használom az injectet, mert Józsi megtanította és gondoltam legyen egy ilyen is (lássa, hogy figyelek :P)
 
-  hero$: Observable<Heroes> = this.ar.params.pipe(
+  hero$: Observable<Hero> = this.ar.params.pipe(
     switchMap((params) => this.heroService.get(params['id']))
   );
 
@@ -25,7 +25,9 @@ export class HeroeditorComponent implements OnInit {
     { key: false, title: 'NO, the hero is not in my library' },
   ];
 
-  hero: Heroes = new Heroes();
+  hero: Hero = new Hero();
+
+  checked: boolean = true;
 
   constructor() {}
 
@@ -35,7 +37,15 @@ export class HeroeditorComponent implements OnInit {
     });
   }
 
-  onSubmit(hero: Heroes): void {
+  onChecked(): void {
+    if (this.checked === true) {
+      this.checked = false;
+    } else if (this.checked === false) {
+      this.checked = true;
+    }
+  }
+
+  onSubmit(hero: Hero): void {
     hero.id = Number(hero.id);
     hero.level = Number(hero.level);
     hero.owned = Boolean(hero.owned);

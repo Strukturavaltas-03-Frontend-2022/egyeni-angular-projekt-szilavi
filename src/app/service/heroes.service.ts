@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Heroes } from '../model/heroes';
+import { Hero } from '../model/hero';
 
 @Injectable({
   providedIn: 'root',
@@ -14,34 +14,34 @@ export class HeroesService {
 
   entityName: string = 'heroes';
 
-  // heroes$: BehaviorSubject<Heroes[]> = new BehaviorSubject<Heroes[]>([]);
+  // heroes$: BehaviorSubject<Hero[]> = new BehaviorSubject<Hero[]>([]);
 
-  // selectedHero$: BehaviorSubject<Heroes | null> =
+  // selectedHero$: BehaviorSubject<Hero | null> =
   //   new BehaviorSubject<Heroes | null>(null);
 
   constructor() {}
 
-  getAll(page: string = ''): Observable<Heroes[]> {
-    return this.http.get<Heroes[]>(`${this.apiUrl}${this.entityName}${page}`);
+  getAll(page: string = ''): Observable<Hero[]> {
+    return this.http.get<Hero[]>(`${this.apiUrl}${this.entityName}${page}`);
   }
 
-  get(id: number): Observable<Heroes> {
-    return this.http.get<Heroes>(`${this.apiUrl}${this.entityName}/${id}`);
+  get(id: number): Observable<Hero> {
+    return this.http.get<Hero>(`${this.apiUrl}${this.entityName}/${id}`);
   }
 
-  create(hero: Heroes): Observable<Heroes> {
-    return this.http.post<Heroes>(`${this.apiUrl}${this.entityName}`, hero);
+  create(hero: Hero): Observable<Hero> {
+    return this.http.post<Hero>(`${this.apiUrl}${this.entityName}`, hero);
   }
 
-  update(hero: Heroes): Observable<Heroes> {
-    return this.http.patch<Heroes>(
+  update(hero: Hero): Observable<Hero> {
+    return this.http.patch<Hero>(
       `${this.apiUrl}${this.entityName}/${hero.id}`,
       hero
     );
   }
 
-  remove(hero: Heroes): Observable<Heroes> {
-    return this.http.delete<Heroes>(
+  remove(hero: Hero): Observable<Hero> {
+    return this.http.delete<Hero>(
       `${this.apiUrl}${this.entityName}/${hero.id}`
     );
   }
@@ -56,7 +56,7 @@ export class HeroesService {
 
   // getAll(): void {
   //   this.http
-  //     .get<Heroes[]>(`${this.apiUrl}${this.entityName}`)
+  //     .get<Hero[]>(`${this.apiUrl}${this.entityName}`)
   //     .subscribe((heroList) => this.heroes$.next(heroList));
   // }
 
@@ -74,7 +74,7 @@ export class HeroesService {
 
   // remove(id: number): void {
   //   this.http
-  //     .delete<Heroes>(`${this.apiUrl}${this.entityName}/${id}`)
+  //     .delete<Hero>(`${this.apiUrl}${this.entityName}/${id}`)
   //     .subscribe(() => {
   //       const heroIndex = this.getCachedHeroIndexById(id);
   //       if (heroIndex > -1) {
@@ -85,17 +85,17 @@ export class HeroesService {
   //     });
   // }
 
-  // create(hero: Heroes): void {
+  // create(hero: Hero): void {
   //   this.http
-  //     .post<Heroes>(`${this.apiUrl}${this.entityName}`, hero)
+  //     .post<Hero>(`${this.apiUrl}${this.entityName}`, hero)
   //     .subscribe((hero) => {
   //       this.heroes$.next(this.heroes$.getValue().concat(hero));
   //     });
   // }
 
-  // update(hero: Heroes): void {
+  // update(hero: Hero): void {
   //   this.http
-  //     .patch<Heroes>(`${this.apiUrl}${this.entityName}`, hero)
+  //     .patch<Hero>(`${this.apiUrl}${this.entityName}`, hero)
   //     .subscribe((hero) => {
   //       const currentHeroList = this.heroes$.getValue();
   //       let heroUpdate = currentHeroList.find(

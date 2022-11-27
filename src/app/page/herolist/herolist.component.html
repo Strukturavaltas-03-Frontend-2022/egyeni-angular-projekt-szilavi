@@ -45,18 +45,18 @@
   <div *ngIf="!filterKey" class="row">
     <nav aria-label="Page navigation example">
       <ul class="pagination justify-content-center">
-        <li class="page-item" (click)="prevPage()">
-          <a class="page-link" tabindex="-1">Previous</a>
+        <li class="page-item paginatortext" (click)="prevPage()">
+          <a class="page-link paginatorbg text-white" tabindex="-1">Previous</a>
         </li>
         <li
           *ngFor="let page of allPage"
           (click)="onPage(page)"
-          class="page-item"
+          class="page-item paginatortext"
         >
-          <a class="page-link">{{ page }}</a>
+          <a class="page-link paginatorbg text-white">{{ page }}</a>
         </li>
-        <li class="page-item" (click)="nextPage()">
-          <a class="page-link">Next</a>
+        <li class="page-item paginatortext" (click)="nextPage()">
+          <a class="page-link paginatorbg text-white">Next</a>
         </li>
       </ul>
     </nav>

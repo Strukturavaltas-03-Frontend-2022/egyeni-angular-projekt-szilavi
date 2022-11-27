@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Heroes } from 'src/app/model/heroes';
+import { Hero } from 'src/app/model/hero';
 import { HeroesService } from 'src/app/service/heroes.service';
 
 @Component({
@@ -15,13 +15,13 @@ export class HerolistComponent implements OnInit {
 
   //paginator
 
-  allHero$: Observable<Heroes[]> = this.heroesService.getAll();
+  allHero$: Observable<Hero[]> = this.heroesService.getAll();
 
   allPage: number[] = [];
 
   page: number = 1;
 
-  heroList: Heroes[] = [];
+  heroList: Hero[] = [];
 
   //searcher
 
